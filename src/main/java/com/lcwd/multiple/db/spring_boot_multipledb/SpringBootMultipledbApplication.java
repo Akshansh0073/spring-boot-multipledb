@@ -1,5 +1,7 @@
 package com.lcwd.multiple.db.spring_boot_multipledb;
 
+import com.lcwd.multiple.db.spring_boot_multipledb.mongodb.Collections.Student;
+import com.lcwd.multiple.db.spring_boot_multipledb.mongodb.Repository.StudentRepo;
 import com.lcwd.multiple.db.spring_boot_multipledb.mysql.entity.User;
 import com.lcwd.multiple.db.spring_boot_multipledb.mysql.repository.UserRepo;
 import com.lcwd.multiple.db.spring_boot_multipledb.postgres.entity.College;
@@ -17,6 +19,9 @@ public class SpringBootMultipledbApplication implements CommandLineRunner {
 
 	@Autowired
 	private CollegeRepo collegeRepo;
+
+	@Autowired
+	private StudentRepo studentRepo;
 
 	public static void main(String[] args) { SpringApplication.run(SpringBootMultipledbApplication.class, args);}
 
@@ -37,6 +42,15 @@ public class SpringBootMultipledbApplication implements CommandLineRunner {
 						.collegePhone("234523").build();
 		College save1 = collegeRepo.save(college);
 		System.out.println("College is created: " + save1);
+
+		Student student = Student.builder()
+				.name("Akshansh")
+				.email("akshansh@gmail.com")
+				.password("1234")
+				.build();
+
+		Student save2 = studentRepo.save(student);
+		System.out.println("Student is created: " + save2.toString());
 
 	}
 }
